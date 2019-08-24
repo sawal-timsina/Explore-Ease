@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codeace.exploreease.R
 import com.codeace.exploreease.adapters.DiscoverAdapter
-import com.codeace.exploreease.entities.Post
+import com.codeace.exploreease.entities.UserPost
 import com.codeace.exploreease.viewModels.DiscoverViewModel
 import kotlinx.android.synthetic.main.fragment_discover.view.*
 
@@ -24,15 +24,15 @@ import kotlinx.android.synthetic.main.fragment_discover.view.*
  * A simple [Fragment] subclass.
  */
 class DiscoverFragment : Fragment(), DiscoverAdapter.ItemListeners {
-    override fun onFoodItemClicked(post: Post) {
+    override fun onFoodItemClicked(post: UserPost) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onItemDelete(post: Post) {
+    override fun onItemDelete(post: UserPost) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onItemUpdate(post: Post) {
+    override fun onItemUpdate(post: UserPost) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
