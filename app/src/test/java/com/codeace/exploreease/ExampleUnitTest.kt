@@ -1,4 +1,4 @@
-package com.codeace.visitnepal2020
+package com.codeace.exploreease
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:checkableBehavior="single"
+        android:enabled="true">
+        <item
+            android:id="@+id/id_discover"
+            android:checkable="true"
+            android:icon="@drawable/ic_discover"
+            android:title="@string/discover"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/id_popular"
+            android:checkable="true"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="@string/popular"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/id_recommendation"
+            android:checkable="true"
+            android:icon="@drawable/recommendation"
+            android:title="@string/filter"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/id_bookmark"
+            android:checkable="true"
+            android:icon="@drawable/category"
+            android:title="@string/bookmark"
+            app:showAsAction="never" />
+    </group>
+
+</menu>

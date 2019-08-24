@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "661525814205",
+    "firebase_url": "https://visit-nepal-2020-ba341.firebaseio.com",
+    "project_id": "visit-nepal-2020-ba341",
+    "storage_bucket": "visit-nepal-2020-ba341.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661525814205:android:5552245171aaa52e",
+        "android_client_info": {
+          "package_name": "com.codeace.exploreease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661525814205-d53ao5ahtit1039jpmis7b3k4hdnuri5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codeace.exploreease",
+            "certificate_hash": "c9d7ac801f7eb950739f2a97801da0e8a625e4c5"
+          }
+        },
+        {
+          "client_id": "661525814205-v0h3qnk4qvkr32lalph2trtk6g0fp0sg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxha69mF0xWyl5EUmUUanWVqBgcx3RdLI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661525814205-v0h3qnk4qvkr32lalph2trtk6g0fp0sg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
