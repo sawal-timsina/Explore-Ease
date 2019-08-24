@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -34,6 +35,8 @@ class LoginActivity : AppCompatActivity() {
     private var inAnim: Animation? = null
     private var outAnim: Animation? = null
     private var imageUri: Uri? = null
+    private val user = FirebaseDatabase.getInstance().reference.child("users")
+    private var userLocation: DatabaseReference? = null
 
     override fun onStart() {
         super.onStart()
@@ -232,14 +235,8 @@ class LoginActivity : AppCompatActivity() {
         loginAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { authTask ->
                 if (authTask.isSuccessful) {
-                    val user = FirebaseDatabase.getInstance().reference.child("users")
-                        .child(loginAuth.currentUser?.uid!!)
-                    user.child("email").setValue(email)
-                    user.child("password").setValue(password)
-                    user.child("isAdmin").setValue(false)
                     // Sign in success, update UI with the signed-in user's information
                     if (userAvatarStorage != null) {
-
                         userAvatarStorage.putFile(imageUri!!)
                             .continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                                 if (!task.isSuccessful) {
@@ -251,6 +248,11 @@ class LoginActivity : AppCompatActivity() {
                                 // Get a URL to the uploaded content
                                 imageUri = taskSnapshot.result
                                 signUpUser(name)
+                                userLocation = user.child(loginAuth.currentUser?.uid!!)
+                                userLocation!!.child("email").setValue(email)
+                                userLocation!!.child("password").setValue(password)
+                                userLocation!!.child("userAvatar").setValue(imageUri.toString())
+                                userLocation!!.child("userName").setValue(name)
                             }.addOnFailureListener {
                                 showMessage(this, it.localizedMessage.toString())
                             }

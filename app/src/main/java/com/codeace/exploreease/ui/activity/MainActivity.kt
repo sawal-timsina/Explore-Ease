@@ -15,11 +15,15 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.codeace.exploreease.R
 import com.codeace.exploreease.ui.fragments.BookmarkFragment
-import com.codeace.exploreease.ui.fragments.CategoryFragment
 import com.codeace.exploreease.ui.fragments.DiscoverFragment
-import com.codeace.exploreease.ui.fragments.RecommendationFragment
+import com.codeace.exploreease.ui.fragments.FilterFragment
+import com.codeace.exploreease.ui.fragments.PopularFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_layout.*
 import kotlinx.android.synthetic.main.nav_layout.*
@@ -63,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+        Glide.with(this).load(R.drawable.nav_bg).centerCrop().into(foodImageNav)
 
         logOut.setOnClickListener {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -81,19 +86,18 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.id_discover -> {
                     selectedFragment = DiscoverFragment()
-                    bottomNavigationView.isSelected = true
                 }
                 R.id.id_popular -> {
-                    selectedFragment = CategoryFragment()
+                    selectedFragment = PopularFragment()
                 }
                 R.id.id_recommendation -> {
-                    selectedFragment = RecommendationFragment()
+                    selectedFragment = FilterFragment()
                 }
                 R.id.id_bookmark -> {
                     selectedFragment = BookmarkFragment()
                 }
             }
-            supportFragmentManager.beginTransaction().replace(R.id.fragment, selectedFragment!!)
+            supportFragmentManager.beginTransaction().replace(R.id.homeFragment, selectedFragment!!)
                 .commit()
             true
         }
@@ -126,6 +130,17 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "UserAdded")
 
         Log.d(TAG, "View Model Initialize")
+        val like = FirebaseDatabase.getInstance().reference.child("/userUploads").child("/posts")
+            .child("/3AOTTqGIA7Zw8QeXNLgPu1QycH52").child("/likes")
+        like.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d("Like", p0.message)
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                Log.d("Like", p0.toString())
+            }
+        })
 //        initViewModel()
     }
 }

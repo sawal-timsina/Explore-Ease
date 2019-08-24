@@ -25,13 +25,14 @@
         app:menu="@menu/menuitem" />
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/homeFragment"
         android:name="com.codeace.exploreease.ui.fragments.DiscoverFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/appbar"
+        tools:layout="@layout/fragment_discover" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

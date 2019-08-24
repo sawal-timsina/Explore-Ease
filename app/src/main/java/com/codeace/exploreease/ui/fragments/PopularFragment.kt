@@ -12,7 +12,7 @@ import com.codeace.exploreease.R
 /**
  * A simple [Fragment] subclass.
  */
-class RecommendationFragment : Fragment() {
+class PopularFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class RecommendationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recommendation, container, false)
+        return inflater.inflate(R.layout.fragment_popular, container, false)
     }
 
 }// Required empty public constructor

@@ -12,7 +12,7 @@ import com.codeace.exploreease.R
 /**
  * A simple [Fragment] subclass.
  */
-class CategoryFragment : Fragment() {
+class FilterFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class CategoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false)
+        return inflater.inflate(R.layout.fragment_filter, container, false)
     }
 
 }// Required empty public constructor
