@@ -38,13 +38,13 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "GetUser")
-        mAuth = FirebaseAuth.getInstance()
         getUser()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mAuth = FirebaseAuth.getInstance()
 
         setSupportActionBar(toolbar)
         toolbar_title.text = toolbar.title
@@ -101,6 +101,10 @@ class MainActivity : AppCompatActivity() {
                 .commit()
             true
         }
+
+        selectedFragment = DiscoverFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.homeFragment, selectedFragment!!)
+            .commit()
     }
 
     private fun getUser() {
@@ -129,9 +133,8 @@ class MainActivity : AppCompatActivity() {
         position.text = currentUser.email
         Log.d(TAG, "UserAdded")
 
-        Log.d(TAG, "View Model Initialize")
-        val like = FirebaseDatabase.getInstance().reference.child("/userUploads").child("/posts")
-            .child("/3AOTTqGIA7Zw8QeXNLgPu1QycH52").child("/likes")
+        val like = FirebaseDatabase.getInstance().reference.child("userUploads").child("posts")
+            .child("3AOTTqGIA7Zw8QeXNLgPu1QycH52").child("likes")
         like.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.d("Like", p0.message)
@@ -141,6 +144,5 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Like", p0.toString())
             }
         })
-//        initViewModel()
     }
 }
