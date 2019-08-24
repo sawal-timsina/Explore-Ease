@@ -48,7 +48,7 @@ class DiscoverAdapter : ListAdapter<Post, DiscoverAdapter.ViewHolder>(DIFF_CALLB
             Glide.with(itemView.context).load(post.imageUri).centerCrop()
                 .placeholder(R.drawable.imageplaceholder).into(itemView.media_image)
             itemView.title_text.text = post.userName.toString()
-            itemView.subtitle_text.text = post.location!![0].locationName.toString()
+            itemView.subtitle_text.text = post.location.toString()
             itemView.action_like.text = post.likes?.size.toString()
             itemView.action_like.setOnClickListener { }
 

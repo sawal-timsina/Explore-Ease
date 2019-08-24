@@ -1,6 +1,6 @@
 package com.codeace.exploreease.entities
 
 data class PostLocation(
-    val id: String? = "",
+    val locationId: String? = "",
     val locationName: String? = ""
 )
