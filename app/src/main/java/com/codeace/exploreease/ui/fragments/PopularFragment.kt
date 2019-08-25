@@ -2,6 +2,7 @@ package com.codeace.exploreease.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ class PopularFragment : Fragment(), PopularAdapter.ItemListeners {
         view.popularRecyclerView.layoutManager = LinearLayoutManager(activity)
         popularAdapter.setItemListeners = this
         popularAdapter.submitList(placeList)
+        Log.d("Place", placeList.toString())
         view.popularRecyclerView.adapter = popularAdapter
         view.popularRecyclerView.setHasFixedSize(true)
 

@@ -99,7 +99,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                         placeLocation.lat,
                         placeLocation.long
                     )
-                ).title(placeLocation.locationName)
+                ).title(placeLocation.LocationName)
             )
         }
 

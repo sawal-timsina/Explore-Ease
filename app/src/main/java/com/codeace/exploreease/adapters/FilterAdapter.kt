@@ -37,7 +37,8 @@ class FilterAdapter : ListAdapter<FilterItems, FilterAdapter.ViewHolder>(DIFF_CA
                 itemListeners.onItemClicked(post)
             }
 
-            Glide.with(itemView.context).load(R.drawable.imageplaceholder).centerCrop()
+            Glide.with(itemView.context).load(post.imageUrl)
+                .placeholder(R.drawable.imageplaceholder).centerCrop()
                 .into(itemView.media_image)
             itemView.textView.text = post.name
         }

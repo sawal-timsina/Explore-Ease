@@ -41,7 +41,7 @@ class PopularAdapter : ListAdapter<PlaceLocation, PopularAdapter.ViewHolder>(DIF
             Glide.with(itemView.context).load(listImage[adapterPosition])
                 .placeholder(R.drawable.imageplaceholder).centerCrop()
                 .into(itemView.media_image)
-            itemView.textView.text = post.locationName
+            itemView.textView.text = post.LocationName
         }
     }
 
@@ -56,10 +56,10 @@ class PopularAdapter : ListAdapter<PlaceLocation, PopularAdapter.ViewHolder>(DIF
                 newItem: PlaceLocation
             ): Boolean {
                 return oldItem.locationId == newItem.locationId &&
-                        oldItem.locationName == newItem.locationName &&
+                        oldItem.LocationName == newItem.LocationName &&
                         oldItem.lat == newItem.lat &&
                         oldItem.long == newItem.long &&
-                        oldItem.description == newItem.description
+                        oldItem.descrption == newItem.descrption
             }
         }
     }
