@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.rishabhharit.roundedimageview.RoundedImageView
+        android:id="@+id/avatar_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:padding="4dp"
+        android:scaleType="centerCrop"
+        app:cornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="@dimen/card_dimn"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/color_on_secondary"
+        app:layout_constraintEnd_toStartOf="@id/optionButton"
+        app:layout_constraintStart_toEndOf="@id/avatar_image"
+        app:layout_constraintTop_toTopOf="@id/avatar_image" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/subtitle_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/color_on_secondary"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_image"
+        app:layout_constraintEnd_toStartOf="@id/optionButton"
+        app:layout_constraintStart_toEndOf="@id/avatar_image"  />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/optionButton"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        app:backgroundTint="@android:color/transparent"
+        app:cornerRadius="25dp"
+        app:iconPadding="0dp"
+        app:iconTint="@color/primaryText"
+        app:icon="@drawable/ic_more_vert_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_image"
+        app:iconGravity="textStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/avatar_image"
+        app:rippleColor="@color/color_background_selected" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
