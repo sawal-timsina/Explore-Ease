@@ -1,6 +1,5 @@
 package com.codeace.exploreease.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -24,8 +23,6 @@ class PostDetails : AppCompatActivity() {
         action_comment.text = userPost.comments.size.toString()
 
         actionBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
             finish()
         }
 
