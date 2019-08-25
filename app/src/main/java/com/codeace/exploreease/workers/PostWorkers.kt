@@ -19,9 +19,6 @@ class PostWorkers(private val onPostExecuteComplete: (List<UserPost>) -> Unit) :
         var userPost = 0
         var userC: Int
 
-        /*
-*/
-
         p0[0]?.children?.forEach { it0 ->
             when (dataCount) {
                 0 -> {
@@ -179,7 +176,33 @@ class PostWorkers(private val onPostExecuteComplete: (List<UserPost>) -> Unit) :
             dataCount++
         }
 
+        listPost.forEach { post ->
+            val _userPost = UserPost()
+            val _likeList: MutableList<Like> = mutableListOf()
+            listLikes.forEach { like ->
+                if (post.key == like.key) {
+                    _likeList.add(like)
+                }
+            }
+            _userPost.likes = _likeList
 
+            val _commentList: MutableList<Comment> = mutableListOf()
+            listComment.forEach { comment ->
+                if (post.key == comment.key) {
+                    _commentList.add(comment)
+                }
+            }
+            _userPost.comments = _commentList
+
+            listUser.forEach { user ->
+                if (post.id == user.uid) {
+                    _userPost.user = user
+                    _userPost.post = post
+                }
+            }
+
+            listUserPost.add(_userPost)
+        }
 
         return listUserPost
     }

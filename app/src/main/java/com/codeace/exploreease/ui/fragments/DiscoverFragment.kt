@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_discover.view.*
  */
 class DiscoverFragment : Fragment(), DiscoverAdapter.ItemListeners {
     override fun onFoodItemClicked(post: UserPost) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onItemDelete(post: UserPost) {

@@ -45,10 +45,12 @@ class DiscoverAdapter : ListAdapter<UserPost, DiscoverAdapter.ViewHolder>(DIFF_C
         fun bindItems(
             post: UserPost, visible: Boolean, itemListeners: ItemListeners
         ) {
-            Glide.with(itemView.context).load(post.post[adapterPosition].imageUri).centerCrop()
+            Glide.with(itemView.context).load(post.post.imageUri).centerCrop()
                 .placeholder(R.drawable.imageplaceholder).into(itemView.media_image)
+            Glide.with(itemView.context).load(post.user.userAvatar).centerCrop()
+                .placeholder(R.drawable.ic_user).into(itemView.avatar_image)
             itemView.title_text.text = post.user.userName
-            itemView.subtitle_text.text = post.post[adapterPosition].locationName
+            itemView.subtitle_text.text = post.post.locationName
             itemView.action_like.text = post.likes.size.toString()
             itemView.action_like.setOnClickListener {
 
