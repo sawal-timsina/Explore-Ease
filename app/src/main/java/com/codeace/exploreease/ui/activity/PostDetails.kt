@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.codeace.exploreease.R
 import com.codeace.exploreease.entities.UserPost
+import com.codeace.exploreease.helpers.comments
 import kotlinx.android.synthetic.main.post_details.*
 
 class PostDetails : AppCompatActivity() {
@@ -14,7 +15,7 @@ class PostDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.post_details)
 
-        val userPost: UserPost = intent.extras!!.get("extra_object") as UserPost
+        val userPost: UserPost = intent.extras!!.get("PostDetails") as UserPost
 
         Glide.with(this).load(userPost.post.imageUri).centerCrop()
             .placeholder(R.drawable.imageplaceholder).into(media_image)
@@ -23,7 +24,7 @@ class PostDetails : AppCompatActivity() {
         action_comment.text = userPost.comments.size.toString()
         recycler.adapter = ArrayAdapter(
             this,
-            R.layout.list_items, userPost.comments
+            R.layout.list_items, comments
         )
 
 

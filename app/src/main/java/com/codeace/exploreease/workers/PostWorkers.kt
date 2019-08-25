@@ -11,6 +11,7 @@ class PostWorkers(
 ) :
     AsyncTask<DataSnapshot, Void, List<UserPost>>() {
     override fun doInBackground(vararg p0: DataSnapshot?): List<UserPost> {
+        val listPlaceLocation: MutableList<PlaceLocation> = mutableListOf()
         val listUserPost: MutableList<UserPost> = mutableListOf()
         val listLikes: MutableList<Like> = mutableListOf()
         val listUser: MutableList<User> = mutableListOf()
@@ -21,21 +22,20 @@ class PostWorkers(
         var userPostInt = 0
         var userPost = 0
         var userC: Int
+        var locationIndex = 0
 
         p0[0]?.children?.forEach { it0 ->
             when (dataCount) {
-                1 -> {
+                0 -> {
                     Log.d("it0", it0.toString().plus("\n"))
+                    it0.children.forEach { location ->
+
+                        locationIndex++
+                    }
+                }
+                1 -> {
                     it0.children.forEach { userUploadsR ->
-                        Log.d(
-                            "userUploadsR",
-                            userUploadsR.toString().plus(" : ${userUploadsR.key}")
-                        )
                         userUploadsR.children.forEach { userUploads ->
-                            Log.d(
-                                "userUploads",
-                                userUploads.toString().plus(" : ${userUploads.key}")
-                            )
                             when (userPostInt) {
                                 0 -> {
                                     val _comment = Comment()
@@ -64,7 +64,6 @@ class PostWorkers(
                                     val _post = Post()
                                     _post.key = userUploads.key!!
                                     userUploads.children.forEach { postD ->
-                                        Log.d("userUploadspostD", postD.toString())
                                         when (userPost) {
                                             0 -> {
                                                 _post.dateTime =
