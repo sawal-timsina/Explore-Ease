@@ -33,7 +33,6 @@ class DiscoverFragment : Fragment(), DiscoverAdapter.ItemListeners {
     override fun onFoodItemClicked(post: UserPost) {
         val intent = Intent(activity, PostDetails::class.java)
         intent.putExtra("PostDetails", post as Serializable)
-
         startActivity(intent)
     }
 

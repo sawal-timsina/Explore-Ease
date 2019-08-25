@@ -1,13 +1,12 @@
 package com.codeace.exploreease.workers
 
 import android.os.AsyncTask
-import android.util.Log
 import com.codeace.exploreease.entities.*
 import com.google.firebase.database.DataSnapshot
 
 class PostWorkers(
     private val onPostExecuteComplete: (List<UserPost>) -> Unit,
-    private val onComplete: (List<Comment>, List<Like>, List<Post>, List<User>) -> Unit
+    private val onComplete: (List<PlaceLocation>, List<Comment>, List<Like>, List<Post>, List<User>) -> Unit
 ) :
     AsyncTask<DataSnapshot, Void, List<UserPost>>() {
     override fun doInBackground(vararg p0: DataSnapshot?): List<UserPost> {
@@ -22,15 +21,12 @@ class PostWorkers(
         var userPostInt = 0
         var userPost = 0
         var userC: Int
-        var locationIndex = 0
 
         p0[0]?.children?.forEach { it0 ->
             when (dataCount) {
                 0 -> {
-                    Log.d("it0", it0.toString().plus("\n"))
                     it0.children.forEach { location ->
-
-                        locationIndex++
+                        listPlaceLocation.add(location.getValue<PlaceLocation>(PlaceLocation::class.java)!!)
                     }
                 }
                 1 -> {
@@ -153,7 +149,7 @@ class PostWorkers(
             listUserPost.add(_userPost)
         }
 
-        onComplete(listComment, listLikes, listPost, listUser)
+        onComplete(listPlaceLocation, listComment, listLikes, listPost, listUser)
 
         return listUserPost
     }

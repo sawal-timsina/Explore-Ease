@@ -6,6 +6,7 @@ import android.util.DisplayMetrics
 import android.widget.Toast
 import com.codeace.exploreease.entities.Comment
 import com.codeace.exploreease.entities.PlaceLocation
+import com.codeace.exploreease.entities.UserPost
 import com.google.android.material.textfield.TextInputEditText
 import java.util.regex.Pattern
 
@@ -20,6 +21,14 @@ val TAG = "DataTest"
 var comments: List<Comment> = listOf()
 
 var placeList: MutableList<PlaceLocation> = mutableListOf()
+
+var userPost: UserPost? = null
+
+var listImage: MutableList<String> = mutableListOf(
+    "",
+    "", "", ""
+)
+
 
 fun convertDpToPixel(dp: Float, context: Context): Float {
     return dp * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)

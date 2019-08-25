@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.codeace.exploreease.R
 import com.codeace.exploreease.adapters.PopularAdapter
 import com.codeace.exploreease.entities.PlaceLocation
+import com.codeace.exploreease.helpers.placeList
 import com.codeace.exploreease.ui.activity.MapActivity
 import kotlinx.android.synthetic.main.fragment_popular.view.*
 import java.io.Serializable
@@ -36,6 +37,7 @@ class PopularFragment : Fragment(), PopularAdapter.ItemListeners {
 
         view.popularRecyclerView.layoutManager = LinearLayoutManager(activity)
         popularAdapter.setItemListeners = this
+        popularAdapter.submitList(placeList)
         view.popularRecyclerView.adapter = popularAdapter
         view.popularRecyclerView.setHasFixedSize(true)
 

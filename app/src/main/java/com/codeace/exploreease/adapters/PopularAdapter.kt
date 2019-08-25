@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codeace.exploreease.R
 import com.codeace.exploreease.entities.PlaceLocation
+import com.codeace.exploreease.helpers.listImage
 import kotlinx.android.synthetic.main.popular_list_item.view.*
 
 class PopularAdapter : ListAdapter<PlaceLocation, PopularAdapter.ViewHolder>(DIFF_CALLBACK) {
@@ -37,7 +38,8 @@ class PopularAdapter : ListAdapter<PlaceLocation, PopularAdapter.ViewHolder>(DIF
                 itemListeners.onItemClicked(post)
             }
 
-            Glide.with(itemView.context).load(R.drawable.imageplaceholder).centerCrop()
+            Glide.with(itemView.context).load(listImage[adapterPosition])
+                .placeholder(R.drawable.imageplaceholder).centerCrop()
                 .into(itemView.media_image)
             itemView.textView.text = post.locationName
         }

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.codeace.exploreease.entities.UserPost
 import com.codeace.exploreease.helpers.comments
+import com.codeace.exploreease.helpers.placeList
 import com.codeace.exploreease.workers.PostWorkers
 import com.google.firebase.database.*
 
@@ -21,7 +22,8 @@ class DiscoveryRepository {
 
                 PostWorkers({
                     allPost.value = it
-                }, { c, l, p, u ->
+                }, { pl, c, l, p, u ->
+                    placeList = pl.toMutableList()
                     comments = c
                 }).execute(dataSnapshot)
 

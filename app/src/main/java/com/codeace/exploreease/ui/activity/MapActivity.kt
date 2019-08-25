@@ -17,13 +17,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.codeace.exploreease.R
-import com.codeace.exploreease.entities.PlaceLocation
+import com.codeace.exploreease.helpers.placeList
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -33,6 +34,7 @@ import kotlinx.android.synthetic.main.activity_maps.*
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private var mMap: GoogleMap? = null
+    private var mCameraPosition: CameraPosition? = null
     private var isOff: Boolean = false
     private var mGeoDataClient: GeoDataClient? = null
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null
@@ -42,17 +44,36 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var mapViewBundle: Bundle? = null
+        if (savedInstanceState != null) {
+            mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION)
+            mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION)
+            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY)
+        }
+
         setContentView(R.layout.activity_maps)
-
-        val placeLocation: PlaceLocation = intent.extras!!.get("PlaceLocation") as PlaceLocation
-
         mGeoDataClient = Places.getGeoDataClient(this)
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
+        mapView.onCreate(mapViewBundle)
         mapView.getMapAsync(this)
 
         myLocationButton.setOnClickListener {
             getDeviceLocation()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (mMap != null) {
+            outState.putParcelable(KEY_CAMERA_POSITION, mMap!!.cameraPosition)
+            outState.putParcelable(KEY_LOCATION, mLastKnownLocation)
+            var mapViewBundle = outState.getBundle(MAP_VIEW_BUNDLE_KEY)
+            if (mapViewBundle == null) {
+                mapViewBundle = Bundle()
+                outState.putBundle(MAP_VIEW_BUNDLE_KEY, mapViewBundle)
+            }
+            mapView.onSaveInstanceState(mapViewBundle)
+            super.onSaveInstanceState(outState)
         }
     }
 
@@ -71,12 +92,20 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         mMap = map
 
-        mMap!!.setOnMapLongClickListener {
-            mMap!!.clear()
-            mMap!!.addMarker(MarkerOptions().position(it).title("Futsal Ground").snippet("4 hr"))
-            mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(it, DEFAULT_ZOOM.toFloat()))
+        placeList.forEach { placeLocation ->
+            mMap!!.addMarker(
+                MarkerOptions().position(
+                    LatLng(
+                        placeLocation.lat,
+                        placeLocation.long
+                    )
+                ).title(placeLocation.locationName)
+            )
         }
 
+        mMap!!.setOnMapLongClickListener {
+            mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(it, DEFAULT_ZOOM.toFloat()))
+        }
         mMap!!.setOnCameraMoveStartedListener {
             if (!isOff) {
                 if (!isOff) {
