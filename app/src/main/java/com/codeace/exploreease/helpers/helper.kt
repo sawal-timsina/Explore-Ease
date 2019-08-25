@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.widget.Toast
+import com.codeace.exploreease.entities.Comment
 import com.google.android.material.textfield.TextInputEditText
 import java.util.regex.Pattern
 
@@ -14,6 +15,9 @@ val EMAIL_REGEX =
 val imagePickCode = 1000
 
 val TAG = "DataTest"
+
+var comments: List<Comment> = listOf()
+
 
 fun convertDpToPixel(dp: Float, context: Context): Float {
     return dp * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)

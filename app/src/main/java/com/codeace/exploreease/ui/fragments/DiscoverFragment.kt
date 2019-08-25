@@ -2,6 +2,7 @@ package com.codeace.exploreease.ui.fragments
 
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,28 +17,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.codeace.exploreease.R
 import com.codeace.exploreease.adapters.DiscoverAdapter
 import com.codeace.exploreease.entities.UserPost
+import com.codeace.exploreease.ui.activity.PostDetails
 import com.codeace.exploreease.viewModels.DiscoverViewModel
 import kotlinx.android.synthetic.main.fragment_discover.view.*
-
+import java.io.Serializable
 
 /**
  * A simple [Fragment] subclass.
  */
 class DiscoverFragment : Fragment(), DiscoverAdapter.ItemListeners {
-    override fun onFoodItemClicked(post: UserPost) {
-
-    }
-
-    override fun onItemDelete(post: UserPost) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onItemUpdate(post: UserPost) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     private var discoverAdapter = DiscoverAdapter()
     private var discoverVM: DiscoverViewModel? = null
+
+    override fun onFoodItemClicked(post: UserPost) {
+        val intent = Intent(activity, PostDetails::class.java)
+        intent.putExtra("extra_object", post as Serializable)
+
+        startActivity(intent)
+    }
+
+    override fun onItemDelete(post: UserPost) {
+    }
+
+    override fun onItemUpdate(post: UserPost) {
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

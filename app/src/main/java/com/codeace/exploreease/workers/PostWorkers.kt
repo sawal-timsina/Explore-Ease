@@ -5,7 +5,10 @@ import android.util.Log
 import com.codeace.exploreease.entities.*
 import com.google.firebase.database.DataSnapshot
 
-class PostWorkers(private val onPostExecuteComplete: (List<UserPost>) -> Unit) :
+class PostWorkers(
+    private val onPostExecuteComplete: (List<UserPost>) -> Unit,
+    private val onComplete: (List<Comment>, List<Like>, List<Post>, List<User>) -> Unit
+) :
     AsyncTask<DataSnapshot, Void, List<UserPost>>() {
     override fun doInBackground(vararg p0: DataSnapshot?): List<UserPost> {
         val listUserPost: MutableList<UserPost> = mutableListOf()
@@ -21,7 +24,7 @@ class PostWorkers(private val onPostExecuteComplete: (List<UserPost>) -> Unit) :
 
         p0[0]?.children?.forEach { it0 ->
             when (dataCount) {
-                0 -> {
+                1 -> {
                     Log.d("it0", it0.toString().plus("\n"))
                     it0.children.forEach { userUploadsR ->
                         Log.d(
@@ -93,64 +96,11 @@ class PostWorkers(private val onPostExecuteComplete: (List<UserPost>) -> Unit) :
                                     listPost.add(_post)
                                 }
                             }
-                            /*userUploads.children.forEach { userUploadsC ->
-                                when (userPostInt) {
-                                    0 -> {
-                                        Log.d("userUploadsC0",userUploadsC.toString().plus("\n"))
-                                        userUploadsC.children.forEach { comment ->
-                                            Log.d("comment", comment.toString())
-                                            comment.children.forEach { commentC ->
-
-                                                userCommentsPostC++
-                                            }
-                                        }
-                                        userComments++
-                                    }
-                                    1 -> {
-                                        Log.d("userUploadsC1",userUploadsC.toString().plus("\n"))
-                                        userUploadsC.children.forEach { likes ->
-                                            Log.d("likes", likes.toString())
-                                        }
-                                        userLikes++
-                                    }
-                                    2 -> {
-                                        Log.d("userUploadsC2",userUploadsC.toString().plus("\n"))
-                                        val _post = Post()
-                                        userUploadsC.children.forEach { post ->
-                                            Log.d("post", post.getValue<String>(String::class.java)!!)
-                                            when (userPost) {
-                                                0 -> {
-                                                    _post.dateTime = post.getValue<String>(String::class.java)!!
-                                                }
-                                                1 -> {
-                                                    _post.description = post.getValue<String>(String::class.java)!!
-                                                }
-                                                2 -> {
-                                                    _post.id = post.getValue<String>(String::class.java)!!
-                                                }
-                                                3 -> {
-                                                    _post.imageUri = post.getValue<String>(String::class.java)!!
-                                                }
-                                                4 -> {
-                                                    _post.key = post.getValue<String>(String::class.java)!!
-                                                }
-                                                5 -> {
-                                                    _post.locationId = post.getValue<String>(String::class.java)!!
-                                                }
-                                                6 -> {
-                                                    _post.locationName = post.getValue<String>(String::class.java)!!
-                                                }
-                                            }
-                                            userPost++
-                                        }
-                                    }
-                                }
-                            }*/
                         }
                         userPostInt++
                     }
                 }
-                1 -> {
+                2 -> {
                     it0.children.forEach { usersR ->
                         val _user = User()
                         _user.uid = usersR.key!!
@@ -203,6 +153,8 @@ class PostWorkers(private val onPostExecuteComplete: (List<UserPost>) -> Unit) :
 
             listUserPost.add(_userPost)
         }
+
+        onComplete(listComment, listLikes, listPost, listUser)
 
         return listUserPost
     }
